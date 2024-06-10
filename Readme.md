@@ -37,7 +37,7 @@ go run main.go
 
 ## API Endpoints
 
-1. GET /get - Get the list of TODO items in paginated form. The default page size (Number of Results in a page) is 10. The page number can be specified in the query parameter as `page`. If the value defined by `page` is less than `defaultPageSize` it will become equal to `defaultPageSize` and if it is more than `maxPageSize` it will become equal to `maxPageSize`. Pagination is performed by using `PageSize` and `PageState` methods from the ScyllaDB driver for Golang.
+1. GET /get - Get the list of TODO items in paginated form. The default page size (Number of Results in a page) is 10. The page number can be specified in the query parameter as `page`. If the value defined by `page` is less than `defaultPageSize` it will become equal to `defaultPageSize` and if it is more than `maxPageSize` it will become equal to `maxPageSize`. Pagination is performed by using `PageSize` and `PageState` methods from the ScyllaDB driver for Golang. The get method also supports the parameter `status` which can be used to filter the TODO items based on their status. The status can be `Completed`, `Pending`, or `In Progress`.
 
 2. POST /insert - Add a new TODO item. The request body should contain the following fields:
 ```json

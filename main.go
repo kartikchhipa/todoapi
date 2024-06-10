@@ -268,7 +268,15 @@ func main() {
 
 		for i := 0; i < pageInt; i++ {
 
-			iter := session.Query("SELECT id, user_id, title, description, status, created, updated FROM todo_db.todos;").PageSize(resultsPerPageInt).PageState(pageState).Iter()
+			query := "SELECT id, user_id, title, description, status, created, updated FROM todo_db.todos"
+
+			if c.Query("status") != "" {
+				query += " WHERE status = '" + c.Query("status") + "'"
+				query += " ALLOW FILTERING"
+			}
+			query += ";"
+
+			iter := session.Query(query).PageSize(resultsPerPageInt).PageState(pageState).Iter()
 			nextPageState := iter.PageState()
 
 			if iter.NumRows() == 0 {
